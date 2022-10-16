@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTest {
     WebDriver wd;
 
@@ -14,6 +16,7 @@ public class LoginTest {
     public void init(){
         wd = new ChromeDriver();
         wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/home");
+        wd.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 
     }
 
@@ -35,15 +38,7 @@ public class LoginTest {
         WebElement clickButton = wd.findElement(By.xpath("//button[1]"));
         clickButton.click();
 
-
-        /*WebElement so = wd.findElement(By.xpath(//button));
-       // String ss = so.getText();
-        System.out.println(ss);
-        Assert.assertEquals(ss,"Sign Out");*/
-
-
-
-
+        Assert.assertTrue(wd.findElements(By.xpath("//button[text() = 'Sign Out']")).size()>0);
 
 
     }
