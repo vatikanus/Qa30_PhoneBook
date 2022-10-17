@@ -9,16 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
-    WebDriver wd;
+public class LoginTest extends TestBase {
 
-    @BeforeMethod
-    public void init(){
-        wd = new ChromeDriver();
-        wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/home");
-        wd.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-
-    }
 
     @Test
     public void loginPositiveTest(){
@@ -42,10 +34,21 @@ public class LoginTest {
 
 
     }
+    @Test
+    public void loginTest2(){
+        String email = "noa@gmail.com";
+        String password = "Nnoa12345$";
 
-    @AfterMethod
-    public void tearDown(){
-       // wd.quit();
+        openLoginRegistrationForm();
+        fillLoginRegistrationForm(email,password);
+        submitLogin();
+        pause(5000);
+        Assert.assertTrue(isElementPresent(By.xpath("//button[text() = 'Sign Out']")));
+
     }
+
+
+
+
 }
 
